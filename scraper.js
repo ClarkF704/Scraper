@@ -13,6 +13,9 @@ mongoose.connect(MONGODB_URI);
 
 var app = express();
 
+// tells it to use index.html in the public folder
+app.use(express.static("public"));
+
 var databaseUrl = "scraper";
 var collections = ["scraped data"];
 
@@ -64,11 +67,11 @@ app.get("/scrape", function (req, res) {
                     title: title,
                     link: link
                 },
-                function(err, inserted){
+                function(err, insert){
                     if (err){
                         console.log(err);
                     } else {
-                        console.log(inserted);
+                        console.log(insert);
                     }
                 });
             }
@@ -77,6 +80,24 @@ app.get("/scrape", function (req, res) {
 
     res.send("scrape complete");
 });
+
+// Clear the DB
+app.get("/clearall", function(req, res) {
+    // Remove every note from the notes collection
+    db.scrapedData.remove({}, function(error, response) {
+      // Log any errors to the console
+      if (error) {
+        console.log(error);
+        res.send(error);
+      }
+      else {
+        // Otherwise, send the mongojs response to the browser
+        // This will fire off the success function of the ajax request
+        console.log(response);
+        res.send(response);
+      }
+    });
+  });
 
 // App listening port
 app.listen(3000, function(){
