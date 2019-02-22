@@ -24,3 +24,15 @@ $("#clear").on("click", function() {
     }
   });
 });
+
+$("#addD").on("click", function(){
+  $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "/scrape",
+    // On a successful call, database gets added
+    success: function(response) {
+      $("#results").alert("Added to database");
+    }
+  });
+})
