@@ -3,12 +3,19 @@ var handlebars = require('express-handlebars');
 var mongoose = require('mongoose');
 var cheerio = require('cheerio');
 var axios = require('axios');
-var userWeb = ('https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States');
 var mongojs = require("mongojs");
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://newz-Usz:Clarkdevs%405%40ds145895.mlab.com:45895/heroku_pvlzpkqh";
 
-mongoose.connect(MONGODB_URI);
+if (process.env.MONGODB_URI) {
+    // EXECTUTESIN HEROKU APP
+    mongoose.connect(process.env.MONGODB_URI)
+
+
+    } else {
+        mongoose.connect(MONGODB_URI)
+    }
+
 
 
 var app = express();
