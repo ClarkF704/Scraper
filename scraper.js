@@ -1,6 +1,5 @@
 var express = require('express');
 var handlebars = require('express-handlebars');
-var mongoose = require('mongoose');
 var cheerio = require('cheerio');
 var axios = require('axios');
 var mongojs = require("mongojs");
@@ -8,17 +7,7 @@ var mongojs = require("mongojs");
 // If deployed, use the port heroku specifies. Otherwise use port 3000
 var PORT = process.env.PORT || 3000;
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://newz-Usz:Clarkdevs%405%40ds145895.mlab.com:45895/heroku_pvlzpkqh";
-
-if (process.env.MONGODB_URI) {
-    // EXECTUTESIN HEROKU APP
-    mongoose.connect(process.env.MONGODB_URI)
-
-
-    } else {
-        mongoose.connect(MONGODB_URI)
-    }
-
+var MONGO_URL = process.env.MONGODB_URI || "scraper";
 
 
 var app = express();
@@ -26,12 +15,11 @@ var app = express();
 // tells it to use index.html in the public folder
 app.use(express.static("public"));
 
-var databaseUrl = "scraper";
-var collections = ["scraped data"];
-
+var collections = ["scrapedData"];
 
 // connecting the mongo js to the db variable
-var db = mongojs(databaseUrl, collections);
+var db = mongojs(MONGO_URL, collections);
+
 db.on("error", function(error){
     console.log("Database Error:" , error)
 });
