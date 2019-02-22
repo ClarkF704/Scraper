@@ -4,6 +4,9 @@ var mongoose = require('mongoose');
 var cheerio = require('cheerio');
 var axios = require('axios');
 var mongojs = require("mongojs");
+
+// If deployed, use the port heroku specifies. Otherwise use port 3000
+var PORT = process.env.PORT || 3000;
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://newz-Usz:Clarkdevs%405%40ds145895.mlab.com:45895/heroku_pvlzpkqh";
 
@@ -107,6 +110,6 @@ app.get("/clearall", function(req, res) {
   });
 
 // App listening port
-app.listen(3000, function(){
-    console.log("app is runnning on port 3000");
+app.listen(PORT, function(){
+    console.log("app is runnning on port", PORT);
 });
