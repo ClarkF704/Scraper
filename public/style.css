@@ -5,3 +5,19 @@
 body{
     background-color:maroon
 }
+#buttonsDog{
+    text-align:center;
+    font-family: 'Sniglet', cursive;
+}
+.titleLink{
+    text-align:center;
+    font-family: 'Sniglet', cursive;
+}
+.ohYea{
+    text-align:center;
+    font-family: 'Saira Extra Condensed', sans-serif;
+}
+.titleScraper{
+    text-align:center;
+    font-family: 'Margarine', cursive;
+}
